@@ -1,8 +1,10 @@
+import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import * as esbuild from 'esbuild-wasm';
 import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
+import CodeEditor from './components/CodeEditor';
 
 const App = () => {
   const ref = useRef<any>();
@@ -61,8 +63,19 @@ const App = () => {
     </html>
   `;
 
+  const initialValue = `for (let i = 1; i <= 100; i++) {
+  if (i % 15 == 0) console.log("FizzBuzz");
+  else if (i % 3 == 0) console.log("Fizz");
+  else if (i % 5 == 0) console.log("Buzz");
+  else console.log(i);
+}`;
+
   return (
     <div>
+      <CodeEditor
+        initialValue={initialValue}
+        onChange={(value) => setInput(value)}
+      />
       <textarea value={input} onChange={(e) => setInput(e.target.value)}></textarea>
       <div>
         <button onClick={onClick}>Submit</button>
