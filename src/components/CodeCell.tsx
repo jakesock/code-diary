@@ -1,35 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CodeEditor from './CodeEditor';
 import Preview from './Preview';
 import bundle from '../bundler';
+import Resizable from './Resizable';
 
 const CodeCell = () => {
   const [code, setCode] = useState('');
   const [input, setInput] = useState('');
 
-  const onClick = async () => {
-    const output = await bundle(input);
-    setCode(output);
-  };
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      const output = await bundle(input);
+      setCode(output);
+    }, 1000);
 
-  const initialValue = `for (let i = 1; i <= 100; i++) {
-  if (i % 15 == 0) console.log('FizzBuzz');
-  else if (i % 3 == 0) console.log('Fizz');
-  else if (i % 5 == 0) console.log('Buzz');
-  else console.log(i);
-}`;
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [input]);
 
+  const initialValue = `import React from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
   return (
     <div>
-      <CodeEditor
-        initialValue={initialValue}
-        onChange={(value) => setInput(value)}
-      />
-      <div>
-        <button onClick={onClick}>Submit</button>
-      </div>
-      <Preview code={code} />
+      <h1>Hello Cruel World!</h1>
     </div>
+  );
+};
+
+ReactDOM.render(<App />, document.querySelector('#root'));`;
+
+  return (
+    <Resizable direction="vertical">
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'row' }}>
+        <Resizable direction="horizontal">
+          <CodeEditor
+            initialValue={initialValue}
+            onChange={(value) => setInput(value)}
+          />
+        </Resizable>
+        <Preview code={code} />
+      </div>
+    </Resizable>
   );
 };
 
