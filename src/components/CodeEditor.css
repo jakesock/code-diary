@@ -3,7 +3,7 @@
   height: 100%;
   width: calc(100% - 10px);
 }
-.editor-wrapper .button-format {
+.editor-wrapper .btn-prettify {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -11,6 +11,6 @@
   opacity: 0;
   transition: opacity 300ms;
 }
-.editor-wrapper:hover .button-format {
+.editor-wrapper:hover .btn-prettify {
   opacity: 1;
 }

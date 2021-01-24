@@ -55,10 +55,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
 
   return (
     <div className="editor-wrapper">
-      <button
-        className="button button-format is-primary is-small"
-        onClick={onPrettifyClick}
-      >
+      <button className="btn btn-prettify btn-primary" onClick={onPrettifyClick}>
         Prettify
       </button>
       <MonacoEditor
