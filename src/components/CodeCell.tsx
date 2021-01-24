@@ -6,12 +6,14 @@ import Resizable from './Resizable';
 
 const CodeCell = () => {
   const [code, setCode] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const [input, setInput] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(async () => {
       const output = await bundle(input);
-      setCode(output);
+      setCode(output.code);
+      setErrorMsg(output.err);
     }, 1000);
 
     return () => {
@@ -41,7 +43,7 @@ ReactDOM.render(<App />, document.querySelector('#root'));`;
             onChange={(value) => setInput(value)}
           />
         </Resizable>
-        <Preview code={code} />
+        <Preview code={code} errorMsg={errorMsg} />
       </div>
     </Resizable>
   );
