@@ -1,0 +1,40 @@
+.add-cell {
+  position: relative;
+  margin: 10px 0;
+  opacity: 0;
+  transition: opacity 300ms ease-in 85ms;
+}
+
+.add-cell:hover {
+  opacity: 1;
+}
+
+.add-cell.visible {
+  opacity: 1;
+}
+
+.add-cell .divider {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  right: 2.5%;
+  left: 2.5%;
+  border-bottom: 1px solid gray;
+  width: 90%;
+  z-index: -1;
+}
+
+.add-cell .add-cell-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.add-cell .add-cell-btn-container button {
+  margin: 0 40px;
+  padding: 0.4em 0.9em;
+  border-radius: 16px;
+}
+
+.add-cell .add-cell-btn-container .add-cell-icon {
+  margin-right: 0.35em;
+}
