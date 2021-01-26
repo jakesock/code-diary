@@ -1,3 +1,4 @@
+import './CodeCell.css';
 import { useEffect } from 'react';
 import { Cell } from '../redux';
 import CodeEditor from './CodeEditor';
@@ -45,7 +46,24 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
             onChange={(value) => updateCell(cell.id, value)}
           />
         </Resizable>
-        {bundle && <Preview code={bundle.code} errorMsg={bundle.err} />}
+        <div className="preview-background">
+          {!bundle || bundle.loading ? (
+            <div className="progress-cover">
+              <div className="progress">
+                <div
+                  className="progress-bar bg-info progress-bar-striped progress-bar-animated"
+                  role="progressbar"
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                >
+                  Loading...
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Preview code={bundle.code} errorMsg={bundle.err} />
+          )}
+        </div>
       </div>
     </Resizable>
   );
